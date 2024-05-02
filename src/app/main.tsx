@@ -67,7 +67,7 @@ export default function Main() {
           header="Workforce reskilling"
           primary="Ingrasp"
           secondary="Our Mission is to dramatically reduce the cost of training the workforce"
-          button="Schedule A Demo"
+          button="Schedule a demo"
           href="mailto:founders@ingrasp.ai"
         />
       </Box>
