@@ -105,7 +105,11 @@ export default function HeroLeft01({
       <Typography fontSize="lg" textColor="text.secondary" lineHeight="lg">
         {secondary}
       </Typography>
-      <Button size="lg" endDecorator={<ArrowForward />}>
+      <Button
+        size="lg"
+        endDecorator={<ArrowForward />}
+        onClick={() => (window.location.href = href)}
+      >
         {button}
       </Button>
     </TwoSidedLayout>
