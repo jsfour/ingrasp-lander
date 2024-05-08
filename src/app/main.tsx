@@ -66,7 +66,7 @@ export default function Main() {
         <HeroLeft01
           header="Workforce reskilling"
           primary="Ingrasp"
-          secondary="Our Mission is to dramatically reduce the cost of training the workforce"
+          secondary="Our mission is to dramatically reduce the cost of training the workforce"
           button="Schedule a demo"
           href="https://tidycal.com/1x7kl93/ingrasp"
         />
