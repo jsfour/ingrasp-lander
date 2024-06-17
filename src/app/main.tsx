@@ -68,7 +68,7 @@ export default function Main() {
           primary="Ingrasp"
           secondary="Our mission is to dramatically reduce the cost of training the workforce"
           button="Schedule a demo"
-          href="https://tidycal.com/1x7kl93/ingrasp"
+          href="https://tidycal.com/elearningart/waitlist"
         />
       </Box>
     </CssVarsProvider>
