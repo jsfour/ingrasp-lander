@@ -6,51 +6,64 @@ export default extendTheme({
   colorSchemes: {
     light: {
       palette: {
+        mode: 'dark',
         primary: {
-          50: "#F2F7FF",
-          100: "#DCEBFE",
-          200: "#BDDAFE",
-          300: "#91C3FC",
-          400: "#60A5FA",
-          500: "#3479E8",
-          600: "#2362EA",
-          700: "#1D4FD7",
-          800: "#1D3FAE",
-          900: "#1E3B8A",
-          solidBg: "var(--joy-palette-primary-600)",
-          solidHoverBg: "var(--joy-palette-primary-500)",
-          solidActiveBg: "var(--joy-palette-primary-400)",
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+        },
+        background: {
+          body: '#0a0a0a',
+          surface: '#171717',
+          level1: '#262626',
+          level2: '#404040',
+          level3: '#525252',
+        },
+        text: {
+          primary: '#ffffff',
+          secondary: '#a3a3a3',
         },
       },
     },
     dark: {
       palette: {
+        mode: 'dark',
         primary: {
-          50: "#1D223F",
-          100: "#0A318C",
-          200: "#1347CC",
-          300: "#1055EA",
-          400: "#357AEA",
-          500: "#2E88F6",
-          600: "#50A1FF",
-          700: "#7AB7FF",
-          800: "#DCEBFE",
-          900: "#F0F6FF",
-          solidBg: "var(--joy-palette-primary-700)",
-          solidColor: "var(--joy-palette-common-black)",
-          solidHoverBg: "var(--joy-palette-primary-600)",
-          solidActiveBg: "var(--joy-palette-primary-400)",
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
         },
         background: {
-          body: "var(--joy-palette-common-black)",
-          surface: "var(--joy-palette-neutral-900)",
+          body: '#0a0a0a',
+          surface: '#171717',
+          level1: '#262626',
+          level2: '#404040',
+          level3: '#525252',
+        },
+        text: {
+          primary: '#ffffff',
+          secondary: '#a3a3a3',
         },
       },
     },
   },
   fontFamily: {
-    display: "'Inter', var(--joy-fontFamily-fallback)",
-    body: "'Inter', var(--joy-fontFamily-fallback)",
+    body: 'Inter, system-ui, -apple-system, sans-serif',
+    display: 'Inter, system-ui, -apple-system, sans-serif',
   },
   components: {
     JoyInput: {
@@ -58,14 +71,30 @@ export default extendTheme({
         root: ({ ownerState, theme }) => ({
           ...(ownerState.variant === "outlined" && {
             [`&:not(.${inputClasses.focused}):hover::before`]: {
-              boxShadow: `inset 0 0 0 2px ${
-                theme.vars.palette?.[ownerState.color!]?.outlinedBorder
-              }`,
+              boxShadow: `inset 0 0 0 2px ${theme.vars.palette?.[ownerState.color!]?.outlinedBorder
+                }`,
             },
           }),
         }),
         input: {
           caretColor: "var(--Input-focusedHighlight)",
+        },
+      },
+    },
+    JoyButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+          fontWeight: 600,
+        },
+      },
+    },
+    JoyCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '12px',
+          backgroundColor: '#171717',
+          '--Card-padding': '1.5rem',
         },
       },
     },
