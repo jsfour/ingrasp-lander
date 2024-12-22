@@ -51,7 +51,7 @@ const TestamonialSection = ({ quote, authorName, authorTitle }: { quote: string,
         >
             <TestimonialWrapper>
                 <QuoteText>
-                    "{quote}"
+                    {`"${quote}"`}
                 </QuoteText>
 
                 <AuthorInfo>
