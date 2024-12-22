@@ -1,0 +1,1 @@
+export const demoLink = "https://tidycal.com/elearningart/demo"

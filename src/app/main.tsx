@@ -13,6 +13,9 @@ import CTASection from "./CTASection";
 import Footer from "./Footer";
 import { NormalPeopleCarousel } from './components/NormalPeopleCarousel';
 import LogoStrip from './components/LogoStrip';
+import ImagesSection from './ImagesSection';
+import TestamonialSection from './components/TestamonialSection';
+import ProblemStatement from './components/ProblemStatement';
 
 export default function Main() {
   return (
@@ -26,12 +29,12 @@ export default function Main() {
       >
         <HeroSection />
         <LogoStrip />
-        <ProblemSection />
+        <ProblemStatement />
+        <DifferentiatorsSection />
         <NormalPeopleCarousel />
         <ProductSection />
-        <DifferentiatorsSection />
+        <TestamonialSection quote="We used to pay $800 for just the photographer on a single, short photoshoot. Now I can build my own scenes anytime." authorName="Melissa" authorTitle="Instructional Designer" />
         <PricingSection />
-        <CTASection />
         <Footer />
       </Box>
     </CssVarsProvider>

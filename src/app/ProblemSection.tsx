@@ -4,6 +4,7 @@ import { Box, Container, Typography, Card } from '@mui/joy';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
+import SectionHeader from './components/Header';
 
 interface QuoteCardProps {
     quote: string;
@@ -215,25 +216,7 @@ export default function ProblemSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <Typography
-                        level="h1"
-                        sx={{
-                            textAlign: 'center',
-                            mb: 6,
-                            fontSize: { xs: '2.5rem', md: '3.5rem' },
-                            fontWeight: 800,
-                            letterSpacing: '-0.02em',
-                            background: 'linear-gradient(180deg, #FFFFFF 0%, #A5B4FC 100%)',
-                            backgroundClip: 'text',
-                            textFillColor: 'transparent',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            transition: 'all 0.3s ease-in-out',
-                            textShadow: '0 0 30px rgba(165, 180, 252, 0.3)',
-                        }}
-                    >
-                        When Story Builders Talk with Us, They Say…
-                    </Typography>
+                    <SectionHeader primaryText="When Story Builders Talk with Us, They Say…" />
                 </motion.div>
 
                 <IconTransition />

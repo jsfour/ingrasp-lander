@@ -1,9 +1,12 @@
 import { Box, Container, styled } from '@mui/material';
 import Image from 'next/image';
+import { grey } from '@mui/material/colors';
 
 const StyledLogoContainer = styled(Box)(({ theme }) => ({
-    //backgroundColor: 'transparent',
+    backgroundColor: 'black',
     padding: theme.spacing(4, 0),
+    mt: 10,
+    mb: 10,
 }));
 
 const LogoWrapper = styled(Box)(({ theme }) => ({
@@ -39,7 +42,7 @@ const logos = [
 export default function LogoStrip() {
     return (
         <StyledLogoContainer>
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" sx={{ mt: 6, mb: 6 }}>
                 <LogoWrapper>
                     {logos.map((logo, index) => (
                         <Image

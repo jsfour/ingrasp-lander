@@ -4,6 +4,8 @@ import { Box, Container, Typography, Card, Button } from '@mui/joy';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import InfiniteIcon from '@mui/icons-material/AllInclusive';
 import SavingsIcon from '@mui/icons-material/Savings';
+import { SectionContainer } from './components/SectionContainer';
+import { demoLink } from './components/link-urls';
 
 interface FeatureProps {
     icon: React.ReactNode;
@@ -38,21 +40,15 @@ const PricingCard = () => {
     return (
         <Box sx={{ perspective: 1000, maxWidth: 400, width: '100%', height: 400 }}>
             <Card
-                component={motion.div}
-                animate={{ rotateY: isFlipped ? 180 : 0 }}
-                transition={{ duration: 0.6 }}
-                onClick={() => setIsFlipped(!isFlipped)}
                 sx={{
+                    p: 0,
                     height: '100%',
                     position: 'relative',
-                    cursor: 'pointer',
-                    transformStyle: 'preserve-3d',
                     '&:hover': {
                         boxShadow: 'lg',
                     },
                 }}
             >
-                {/* Front of card */}
                 <Box
                     sx={{
                         position: 'absolute',
@@ -64,77 +60,28 @@ const PricingCard = () => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         p: 4,
+                        textAlign: 'center',
                     }}
                 >
-                    <Typography level="h2" sx={{ mb: 2 }}>
-                        $50
-                        <Typography level="body-sm" component="span">/month</Typography>
+                    <Typography level="h2" sx={{ mb: 2, textAlign: 'center' }}>
+                        $800
+                        <Typography level="body-sm" component="span">/year</Typography>
                     </Typography>
-                    <Typography level="body-md" sx={{ mb: 4, color: 'text.secondary' }}>
-                        billed $600 annually
-                    </Typography>
-                    {features.map((feature, index) => (
-                        <Feature key={index} {...feature} />
-                    ))}
+                    <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        {features.map((feature, index) => (
+                            <Feature key={index} {...feature} />
+                        ))}
+                    </Box>
                     <Button
                         size="lg"
                         sx={{ mt: 4 }}
                         onClick={(e) => {
                             e.stopPropagation();
-                            window.location.href = '/signup';
+                            window.location.href = demoLink;
                         }}
                     >
                         Get Started Now
                     </Button>
-                </Box>
-
-                {/* Back of card */}
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        backfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        p: 4,
-                    }}
-                >
-                    <Typography level="h3" sx={{ mb: 4 }}>
-                        Annual Cost Comparison
-                    </Typography>
-                    <Box sx={{ width: '100%', mb: 4 }}>
-                        <Typography level="body-md" sx={{ mb: 1 }}>Ingrasp ($600/year)</Typography>
-                        <motion.div
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ duration: 1, delay: 0.2 }}
-                            style={{
-                                height: 24,
-                                background: 'linear-gradient(90deg, #2196f3 0%, #1976d2 100%)',
-                                borderRadius: 4,
-                                transformOrigin: 'left',
-                            }}
-                        />
-                    </Box>
-                    <Box sx={{ width: '100%' }}>
-                        <Typography level="body-md" sx={{ mb: 1 }}>Custom Photo Shoots ($10,000+/year)</Typography>
-                        <motion.div
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ duration: 1, delay: 0.4 }}
-                            style={{
-                                height: 24,
-                                background: 'linear-gradient(90deg, #e91e63 0%, #c2185b 100%)',
-                                borderRadius: 4,
-                                transformOrigin: 'left',
-                                width: '100%',
-                            }}
-                        />
-                    </Box>
                 </Box>
             </Card>
         </Box>
@@ -246,10 +193,10 @@ const CostComparisonChart = () => {
 
 export default function PricingSection() {
     return (
-        <Box
+        <SectionContainer
             sx={{
                 py: 8,
-                background: 'linear-gradient(180deg, #f5f5f5 0%, #fff 100%)',
+                backgroundColor: "#111"
             }}
         >
             <Container maxWidth="lg">
@@ -284,6 +231,6 @@ export default function PricingSection() {
                     <CostComparisonChart />
                 </Box>
             </Container>
-        </Box>
+        </SectionContainer>
     );
 } 

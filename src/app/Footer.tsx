@@ -99,8 +99,6 @@ export default function Footer() {
                 overflow: 'hidden',
             }}
         >
-            <AnimatedBackground />
-
             <Container
                 maxWidth="lg"
                 sx={{
@@ -123,7 +121,7 @@ export default function Footer() {
                     {/* Brand Column */}
                     <Box>
                         <Typography level="h4" sx={{ mb: 2 }}>
-                            InGrasp
+                            Ingrasp
                         </Typography>
                         <Typography level="body-sm" sx={{ color: 'text.secondary', mb: 2 }}>
                             Transform your stories with advanced character generation and scene building.
@@ -169,7 +167,7 @@ export default function Footer() {
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                 <EmailIcon sx={{ fontSize: 'sm', color: 'text.secondary' }} />
                                 <Link
-                                    href="mailto:support@getingrasp.com"
+                                    href="mailto:support@ingrasp.ai"
                                     sx={{ color: 'text.secondary', textDecoration: 'none' }}
                                 >
                                     support@getingrasp.com

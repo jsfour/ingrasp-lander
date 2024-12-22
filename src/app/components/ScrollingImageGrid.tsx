@@ -42,25 +42,24 @@ const images = [
 
 interface ScrollingColumnProps {
     images: string[];
-    duration: number;
+    duration?: number;
     delay: number;
+    index?: number;
 }
 
-const ScrollingColumn = ({ images, duration, delay }: ScrollingColumnProps) => {
+const ScrollingColumn = ({ images, duration, delay, index = 0 }: ScrollingColumnProps) => {
     const [mounted, setMounted] = useState(false);
-    const startTime = useRef(Date.now());
-    const initialDuration = duration / 4;
-    const finalDuration = duration * 2;
+    const minDuration = 500;
+    const maxDuration = 2500;
+    const randomDuration = Math.random() * (maxDuration - minDuration) + minDuration;
+    const currentDuration = duration ? Math.max(minDuration, Math.min(maxDuration, duration)) : maxDuration;
+
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
     const repeatedImages = [...images, ...images, ...images, ...images, ...images, ...images];
-
-    const currentDuration = mounted ?
-        Math.min(finalDuration, initialDuration + ((Date.now() - startTime.current) / 1000) * (finalDuration - initialDuration))
-        : initialDuration;
 
     return (
         <Box
@@ -72,8 +71,8 @@ const ScrollingColumn = ({ images, duration, delay }: ScrollingColumnProps) => {
             }}
         >
             <motion.div
-                initial={{ y: '-50%' }}
-                animate={{ y: '0%' }}
+                initial={{ y: index % 2 === 0 ? '-50%' : '0%' }}
+                animate={{ y: index % 2 === 0 ? '0%' : '-50%' }}
                 transition={{
                     duration: currentDuration,
                     repeat: Infinity,
@@ -176,8 +175,8 @@ export default function ScrollingImageGrid() {
                 <ScrollingColumn
                     key={index}
                     images={columnImages}
-                    duration={480 + (index * 30)}
-                    delay={0}
+                    delay={index * 0.1}
+                    index={index}
                 />
             ))}
         </Box>

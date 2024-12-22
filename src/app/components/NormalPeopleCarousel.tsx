@@ -1,42 +1,13 @@
 import { Box, Typography } from '@mui/joy';
+import SectionHeader from './Header';
+import { SectionContainer } from './SectionContainer';
 
 export const NormalPeopleCarousel = ({ primary, secondary }: { primary?: string, secondary?: string }) => {
     const images = Array.from({ length: 8 }, (_, i) => `/photos/normal-people/${i + 1}.png`);
 
     return (
-        <Box sx={{ width: '100%', mt: 8, mb: 8 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mb: 4 }}>
-                <Typography
-                    level="h1"
-                    sx={{
-                        textAlign: 'center',
-                        //fontSize: { xs: '2.5rem', md: '3.5rem' },
-                        //fontWeight: 400,
-                        letterSpacing: '-0.02em',
-                        background: 'linear-gradient(180deg, #FFFFFF 0%, #A5B4FC 100%)',
-                        backgroundClip: 'text',
-                        textFillColor: 'transparent',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        transition: 'all 0.3s ease-in-out',
-                        textShadow: '0 0 30px rgba(165, 180, 252, 0.3)',
-                    }}
-                >
-                    {primary || "Finally normal people. In multiple situations."}
-                </Typography>
-                <Typography
-                    level="h3"
-                    sx={{
-                        //fontWeight: 500,
-                        textAlign: 'center',
-                        color: 'text.secondary',
-                        maxWidth: '45ch',
-                        textShadow: '0 2px 10px rgba(0,0,0,0.5)',
-                    }}
-                >
-                    {secondary || "Finally normal people. In multiple situations."}
-                </Typography>
-            </Box>
+        <SectionContainer>
+            <SectionHeader primaryText={primary || "Finally normal people. In multiple situations."} />
 
             <Box
                 sx={{
@@ -78,6 +49,6 @@ export const NormalPeopleCarousel = ({ primary, secondary }: { primary?: string,
                     </Box>
                 ))}
             </Box>
-        </Box>
+        </SectionContainer>
     );
 }; 

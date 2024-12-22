@@ -4,16 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollingImageGrid from './components/ScrollingImageGrid';
 import StarfieldEffect from './components/StarfieldEffect';
 import { useState } from 'react';
+import { demoLink } from './components/link-urls';
 
 export default function HeroSection() {
     const [isHovering, setIsHovering] = useState(false);
-    const [isClicked, setIsClicked] = useState(false);
-
-    const handleButtonClick = () => {
-        setIsClicked(true);
-        // Reset after animation
-        setTimeout(() => setIsClicked(false), 2000);
-    };
 
     return (
         <Box
@@ -28,7 +22,7 @@ export default function HeroSection() {
             }}
         >
             <AnimatePresence>
-                {!isHovering && !isClicked && (
+                {!isHovering && (
                     <motion.div
                         style={{
                             position: 'absolute',
@@ -49,7 +43,7 @@ export default function HeroSection() {
                 )}
             </AnimatePresence>
 
-            <StarfieldEffect isActive={isHovering} isClicked={isClicked} />
+            <StarfieldEffect isActive={isHovering} isClicked={false} />
 
             <Container
                 sx={{
@@ -65,7 +59,7 @@ export default function HeroSection() {
                         animate={{
                             opacity: 1,
                             y: 0,
-                            scale: isClicked ? 1.1 : 1,
+                            scale: isHovering ? 1.1 : 1,
                         }}
                         transition={{ duration: 0.5 }}
                     >
@@ -91,7 +85,7 @@ export default function HeroSection() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{
-                            opacity: isClicked ? 0 : 1,
+                            opacity: isHovering ? 0 : 1,
                             y: 0
                         }}
                         transition={{ duration: 0.5, delay: 0.1 }}
@@ -112,7 +106,7 @@ export default function HeroSection() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{
-                            opacity: isClicked ? 0 : 1,
+                            opacity: 1,
                             y: 0
                         }}
                         transition={{ duration: 0.5, delay: 0.2 }}
@@ -127,7 +121,7 @@ export default function HeroSection() {
                                 color="primary"
                                 onMouseEnter={() => setIsHovering(true)}
                                 onMouseLeave={() => setIsHovering(false)}
-                                onClick={handleButtonClick}
+                                onClick={() => window.location.href = demoLink}
                                 sx={{
                                     background: (theme) =>
                                         `linear-gradient(45deg, ${theme.vars.palette.primary[600]}, ${theme.vars.palette.primary[500]})`,
@@ -140,27 +134,6 @@ export default function HeroSection() {
                                 }}
                             >
                                 Get Started
-                            </Button>
-                            <Button
-                                size="lg"
-                                variant="outlined"
-                                onMouseEnter={() => setIsHovering(true)}
-                                onMouseLeave={() => setIsHovering(false)}
-                                onClick={handleButtonClick}
-                                sx={{
-                                    color: 'primary.300',
-                                    transition: 'all 0.2s ease-in-out',
-                                    backdropFilter: 'blur(8px)',
-                                    backgroundColor: 'rgba(0,0,0,0.3)',
-                                    '&:hover': {
-                                        orderColor: 'primary.400',
-                                        transform: 'translateY(-2px)',
-                                        boxShadow: '0 0 30px rgba(99, 102, 241, 0.2)',
-                                        backgroundColor: 'rgba(0,0,0,0.4)',
-                                    },
-                                }}
-                            >
-                                Learn More
                             </Button>
                         </Stack>
                     </motion.div>
