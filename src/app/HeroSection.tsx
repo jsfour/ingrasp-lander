@@ -59,7 +59,7 @@ export default function HeroSection() {
                         animate={{
                             opacity: 1,
                             y: 0,
-                            scale: isHovering ? { xs: 1, md: 1.1 } : 1,
+                            //scale: isHovering ? { xs: 1, md: 1.1 } : 1,
                         }}
                         transition={{ duration: 0.5 }}
                     >
