@@ -8,7 +8,10 @@ import { useState } from 'react';
 import { grey } from '@mui/material/colors';
 import SectionHeader from './components/Header';
 import { SectionContainer } from './components/SectionContainer';
-import { keyframes } from '@emotion/react';
+import { keyframes } from '@emotion/react'
+import ImageSearchIcon from '@mui/icons-material/ImageSearch';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 
 interface Feature {
     id: number;
@@ -27,17 +30,24 @@ const features: Feature[] = [
         image: "/product/characters-in-situations.png" // Add your dashboard image path
     },
     {
+        id: 4,
+        title: "Create chracters that don't exist in stock photo libraries",
+        description: "Create hard to find, diverse characters like children, people with disabilities, and more.",
+        icon: <ImageSearchIcon sx={{ fontSize: '2rem' }} />,
+        image: "/photos/hard-to-find-characters.png"
+    },
+    {
         id: 1,
         title: "Control poses and expressions of characters",
-        description: "Access your data on the go with our mobile app version of the product.",
-        icon: <DashboardIcon sx={{ fontSize: '2rem' }} />,
+        description: "Control the poses and expressions of characters to create a consistent look and feel across images.",
+        icon: <EmojiPeopleIcon sx={{ fontSize: '2rem' }} />,
         image: "/product/expression-control.png" // Add your mobile image path
     },
     {
         id: 3,
         title: "Any setting you can imagine, without the photo shoot",
-        description: "Use the product seamlessly across web, mobile, and desktop platforms.",
-        icon: <DevicesIcon sx={{ fontSize: '2rem' }} />,
+        description: "Shoot in scenes that would cost tens of thousands of dollars to create using a professional photographer.",
+        icon: <CameraAltIcon sx={{ fontSize: '2rem' }} />,
         image: "/product/background-studio-shot.png" // Add your platforms image path
     }
 ];
@@ -66,7 +76,8 @@ export default function ProductSection() {
                         border: `1px solid ${grey[900]}`,
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        p: { xs: 4, md: 2 }
                     }}>
                         <AnimatePresence mode="wait">
                             <motion.img
@@ -82,6 +93,7 @@ export default function ProductSection() {
                                     height: '80%',
                                     objectFit: 'cover',
                                     borderRadius: '5px',
+                                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)'
                                 }}
                             />
                         </AnimatePresence>

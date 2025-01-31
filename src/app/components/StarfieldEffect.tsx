@@ -21,12 +21,15 @@ export default function StarfieldEffect({ isActive, isClicked }: StarfieldEffect
     const speedRef = useRef(0);
     const requestRef = useRef<number>();
     const lastTimeRef = useRef<number>();
+    const [scale, setScale] = useState(1);
 
     // Initialize stars
     useEffect(() => {
         const initStars = () => {
             const newStars: Star[] = [];
-            for (let i = 0; i < 400; i++) {
+            // Reduce number of stars for mobile devices
+            const starCount = window.innerWidth < 768 ? 200 : 400;
+            for (let i = 0; i < starCount; i++) {
                 newStars.push({
                     x: Math.random() * 2000 - 1000,
                     y: Math.random() * 2000 - 1000,
@@ -64,7 +67,6 @@ export default function StarfieldEffect({ isActive, isClicked }: StarfieldEffect
             );
 
             // Clear canvas with semi-transparent black
-            // Adjust trail length based on speed
             const alpha = isClicked ? 0.05 : 0.1;
             ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -73,8 +75,12 @@ export default function StarfieldEffect({ isActive, isClicked }: StarfieldEffect
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
 
+            // Calculate scale based on screen size
+            const baseScale = Math.min(canvas.width, canvas.height) / 1000;
+            const scaleFactor = baseScale * 500;
+
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.lineWidth = isClicked ? 3 : 2;
+            ctx.lineWidth = isClicked ? 2 : 1.5;
             ctx.beginPath();
 
             stars.forEach((star) => {
@@ -88,8 +94,9 @@ export default function StarfieldEffect({ isActive, isClicked }: StarfieldEffect
                     star.py = undefined;
                 }
 
-                const x = star.x / star.z * 500 + centerX;
-                const y = star.y / star.z * 500 + centerY;
+                // Apply screen-size-aware scaling
+                const x = (star.x / star.z) * scaleFactor + centerX;
+                const y = (star.y / star.z) * scaleFactor + centerY;
 
                 if (star.px !== undefined && star.py !== undefined) {
                     ctx.moveTo(x, y);
@@ -108,6 +115,8 @@ export default function StarfieldEffect({ isActive, isClicked }: StarfieldEffect
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            // Update scale on resize
+            setScale(Math.min(window.innerWidth, window.innerHeight) / 1000);
         };
 
         window.addEventListener('resize', resizeCanvas);

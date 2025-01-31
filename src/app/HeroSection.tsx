@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollingImageGrid from './components/ScrollingImageGrid';
 import StarfieldEffect from './components/StarfieldEffect';
 import { useState } from 'react';
-import { demoLink } from './components/link-urls';
+import { demoLink } from './constants/link-urls';
 
 export default function HeroSection() {
     const [isHovering, setIsHovering] = useState(false);
@@ -59,7 +59,7 @@ export default function HeroSection() {
                         animate={{
                             opacity: 1,
                             y: 0,
-                            scale: isHovering ? 1.1 : 1,
+                            scale: isHovering ? { xs: 1, md: 1.1 } : 1,
                         }}
                         transition={{ duration: 0.5 }}
                     >
@@ -76,6 +76,9 @@ export default function HeroSection() {
                                 WebkitTextFillColor: 'transparent',
                                 transition: 'all 0.3s ease-in-out',
                                 textShadow: '0 0 30px rgba(165, 180, 252, 0.3)',
+                                px: { xs: 2, md: 0 },
+                                overflowWrap: 'break-word',
+                                wordWrap: 'break-word',
                             }}
                         >
                             Realistic Consistent Characters for Your Training Programs

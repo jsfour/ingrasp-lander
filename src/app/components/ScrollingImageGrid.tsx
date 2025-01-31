@@ -1,43 +1,27 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Box } from '@mui/joy';
+import { Box, useTheme } from '@mui/joy';
 import { useEffect, useState, useRef } from 'react';
 
 const images = [
-    // Professional/Business
-    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200', // Professional woman
-    'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200', // Business man
-    'https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=200', // Woman presenting
-    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=200', // Office meeting
-
-    // Training/Education
-    'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=200', // Workshop
-    'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=200', // Presentation
-    'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=200', // Learning
-    'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=200', // Study group
-
-    // Casual/Lifestyle
-    'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200', // Casual portrait
-    'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=200', // Group collaboration
-    'https://images.unsplash.com/photo-1484863137850-59afcfe05386?q=80&w=200', // Coffee shop work
-    'https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=200', // Students group
-
-    // Diverse Scenarios
-    'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=200', // Team meeting
-    'https://images.unsplash.com/photo-1571624436279-b272aff752b5?q=80&w=200', // Presentation screen
-    'https://images.unsplash.com/photo-1565688534245-05d6b5be184a?q=80&w=200', // Diverse team
-    'https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?q=80&w=200', // Office celebration
-
-    // Tech/Modern
-    'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=200', // Tech workspace
-    'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=200', // Digital interaction
-    'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=200', // Tech team
-    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=200', // Digital workspace
-
-    // Creative/Story
-    'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=200', // Creative work
-    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=200', // Storytelling
-    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=200', // Team planning
+    '/photos/characters/1.png',
+    '/photos/characters/2.png',
+    '/photos/characters/3.png',
+    '/photos/characters/4.png',
+    '/photos/characters/5.png',
+    '/photos/characters/6.png',
+    '/photos/characters/7.png',
+    '/photos/characters/8.png',
+    '/photos/characters/9.png',
+    '/photos/characters/10.png',
+    '/photos/characters/11.png',
+    '/photos/characters/12.png',
+    '/photos/characters/13.png',
+    '/photos/characters/14.png',
+    '/photos/characters/15.png',
+    '/photos/characters/16.png',
+    '/photos/characters/17.png',
+    '/photos/characters/18.png',
 ];
 
 interface ScrollingColumnProps {
@@ -126,6 +110,7 @@ const ScrollingColumn = ({ images, duration, delay, index = 0 }: ScrollingColumn
 
 export default function ScrollingImageGrid() {
     const [mounted, setMounted] = useState(false);
+    const theme = useTheme();
 
     useEffect(() => {
         setMounted(true);
@@ -140,7 +125,13 @@ export default function ScrollingImageGrid() {
         return newArray;
     };
 
-    const columns = Array.from({ length: 8 }, () => shuffleArray(images));
+    // Determine number of columns based on breakpoint
+    const numColumns = {
+        xs: 3,
+        md: 8,
+    };
+
+    const columns = Array.from({ length: numColumns.md }, () => shuffleArray(images));
 
     return (
         <Box
@@ -152,7 +143,10 @@ export default function ScrollingImageGrid() {
                 bottom: 0,
                 overflow: 'hidden',
                 display: 'grid',
-                gridTemplateColumns: 'repeat(8, 1fr)',
+                gridTemplateColumns: {
+                    xs: `repeat(${numColumns.xs}, 1fr)`,
+                    md: `repeat(${numColumns.md}, 1fr)`,
+                },
                 gap: '0.75rem',
                 p: '0.75rem',
                 opacity: mounted ? 0.35 : 0,
@@ -171,7 +165,7 @@ export default function ScrollingImageGrid() {
                 },
             }}
         >
-            {columns.map((columnImages, index) => (
+            {columns.slice(0, theme.breakpoints.values.md ? numColumns.md : numColumns.xs).map((columnImages, index) => (
                 <ScrollingColumn
                     key={index}
                     images={columnImages}

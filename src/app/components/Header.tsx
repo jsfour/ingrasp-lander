@@ -5,18 +5,19 @@ import { SxProps } from '@mui/joy/styles/types';
 interface SectionHeaderProps {
     primaryText: string;
     secondaryText?: string;
+    id?: string;
 }
 
-const SectionHeader = ({ primaryText, secondaryText }: SectionHeaderProps) => {
+const SectionHeader = ({ primaryText, secondaryText, id }: SectionHeaderProps) => {
     return (
-        <Box sx={{ mb: 6 }}>
+        <Box sx={{ mb: { xs: 3, sm: 4, md: 6 } }}>
             <Typography
+                id={id}
                 level="h1"
                 sx={{
                     textAlign: 'center',
-                    //fontSize: { xs: '2.5rem', md: '3.5rem' },
-                    //fontWeight: 800,
-                    letterSpacing: '-0.02em',
+                    fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
+                    letterSpacing: { xs: '-0.01em', md: '-0.02em' },
                     background: 'linear-gradient(180deg, #FFFFFF 0%, #A5B4FC 100%)',
                     backgroundClip: 'text',
                     textFillColor: 'transparent',
@@ -32,14 +33,17 @@ const SectionHeader = ({ primaryText, secondaryText }: SectionHeaderProps) => {
             {secondaryText && <Typography
                 level="h3"
                 sx={{
-                    mt: 2,
+                    mt: { xs: 1, sm: 1.5, md: 2 },
                     textAlign: 'center',
                     fontWeight: 500,
                     color: 'text.secondary',
-                    //textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+                    fontSize: { xs: '1rem', sm: '1.25rem', md: '1.5rem' },
                 }}
             >
-                <Box sx={{ maxWidth: '45ch', mx: 'auto' }}>
+                <Box sx={{
+                    maxWidth: { xs: '35ch', sm: '40ch', md: '45ch' },
+                    mx: 'auto'
+                }}>
                     {secondaryText}
                 </Box>
             </Typography>}

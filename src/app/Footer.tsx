@@ -4,6 +4,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
+import { loginLink, demoLink } from './constants/link-urls';
 
 interface FooterLinkProps {
     href: string;
@@ -126,7 +127,7 @@ export default function Footer() {
                         <Typography level="body-sm" sx={{ color: 'text.secondary', mb: 2 }}>
                             Transform your stories with advanced character generation and scene building.
                         </Typography>
-                        <Box sx={{ display: 'flex', gap: 1 }}>
+                        { /* <Box sx={{ display: 'flex', gap: 1 }}>
                             <SocialButton
                                 href="https://linkedin.com/company/ingrasp"
                                 icon={<LinkedInIcon />}
@@ -141,8 +142,8 @@ export default function Footer() {
                                 href="https://github.com/ingrasp"
                                 icon={<GitHubIcon />}
                                 label="GitHub"
-                            />
-                        </Box>
+                            /> 
+                        </Box> */}
                     </Box>
 
                     {/* Quick Links */}
@@ -151,10 +152,10 @@ export default function Footer() {
                             Quick Links
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            <FooterLink href="/about">About</FooterLink>
+                            {/* <FooterLink href="/about">About</FooterLink> */}
                             <FooterLink href="/faq">FAQ</FooterLink>
-                            <FooterLink href="/privacy">Privacy Policy</FooterLink>
-                            <FooterLink href="/terms">Terms of Service</FooterLink>
+                            {/* <FooterLink href="/privacy">Privacy Policy</FooterLink> */}
+                            {/* <FooterLink href="/terms">Terms of Service</FooterLink> */}
                         </Box>
                     </Box>
 
@@ -167,7 +168,7 @@ export default function Footer() {
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                 <EmailIcon sx={{ fontSize: 'sm', color: 'text.secondary' }} />
                                 <Link
-                                    href="mailto:support@ingrasp.ai"
+                                    href="mailto:sales@ingrasp.ai"
                                     sx={{ color: 'text.secondary', textDecoration: 'none' }}
                                 >
                                     support@getingrasp.com
@@ -176,7 +177,7 @@ export default function Footer() {
                         </Box>
                     </Box>
 
-                    {/* Newsletter */}
+                    {/* Newsletter 
                     <Box>
                         <Typography level="title-lg" sx={{ mb: 2 }}>
                             Stay Updated
@@ -196,7 +197,7 @@ export default function Footer() {
                         >
                             Subscribe →
                         </Link>
-                    </Box>
+                    </Box>*/}
                 </Box>
 
                 <Divider sx={{ my: 4 }} />
@@ -212,12 +213,11 @@ export default function Footer() {
                     }}
                 >
                     <Typography level="body-sm" sx={{ color: 'text.secondary' }}>
-                        © 2024 InGrasp. All rights reserved.
+                        © 2024 Ingrasp. All rights reserved.
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 3 }}>
-                        <FooterLink href="/privacy">Privacy</FooterLink>
-                        <FooterLink href="/terms">Terms</FooterLink>
-                        <FooterLink href="/cookies">Cookies</FooterLink>
+                        <FooterLink href={loginLink}>Sign In</FooterLink>
+                        <FooterLink href={demoLink}>Book Demo</FooterLink>
                     </Box>
                 </Box>
             </Container>

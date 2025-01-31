@@ -1,11 +1,11 @@
-import { Box, Typography, Button, Grid, IconButton } from '@mui/joy';
+import { Box, Typography, Button, Grid, IconButton, useTheme } from '@mui/joy';
 import Card from '@mui/joy/Card';
 import { styled } from '@mui/joy/styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import SectionHeader from './Header';
-import { demoLink } from './link-urls';
+import { demoLink } from '../constants/link-urls';
 import { SectionContainer } from './SectionContainer';
 
 const benefits = [
@@ -56,14 +56,30 @@ const StyledCard = styled(Card)({
     },
 });
 
-const CarouselContainer = styled(Box)({
+const CarouselContainer = styled(Box)(({ theme }) => ({
     position: 'relative',
     overflow: 'hidden',
     padding: '2rem 0',
-});
+    [theme.breakpoints.down('sm')]: {
+        padding: '1rem 0',
+    },
+}));
 
 const ProblemStatement = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+    const theme = useTheme();
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const handlePrevious = () => {
         setSelectedIndex((prev) => (prev === 0 ? benefits.length - 1 : prev - 1));
@@ -74,6 +90,10 @@ const ProblemStatement = () => {
     };
 
     const getVisibleCards = () => {
+        if (isMobile) {
+            return [selectedIndex];
+        }
+
         const cards = [];
         const prev = selectedIndex === 0 ? benefits.length - 1 : selectedIndex - 1;
         const next = selectedIndex === benefits.length - 1 ? 0 : selectedIndex + 1;
@@ -87,36 +107,45 @@ const ProblemStatement = () => {
 
     return (
         <SectionContainer>
-            <Box sx={{ maxWidth: '1200px', mx: 'auto', px: 3 }}>
-                <SectionHeader primaryText="Discover the Power of Training Using Scenarios" secondaryText="Storytelling is a powerful tool for learning. It engages the brain in a way that is more effective than traditional information dumps." />
+            <Box sx={{
+                maxWidth: '1200px',
+                mx: 'auto',
+                px: { xs: 2, sm: 3 }
+            }}>
+                <SectionHeader
+                    primaryText="Discover the Power of Training Using Scenarios"
+                    secondaryText="Storytelling is a powerful tool for learning. It engages the brain in a way that is more effective than traditional information dumps."
+                />
 
                 <CarouselContainer>
-                    <IconButton
-                        onClick={handlePrevious}
-                        sx={{
-                            position: 'absolute',
-                            left: 0,
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            zIndex: 2
-                        }}
-                    >
-                        <KeyboardArrowLeftIcon />
-                    </IconButton>
+                    {!isMobile && (
+                        <IconButton
+                            onClick={handlePrevious}
+                            sx={{
+                                position: 'absolute',
+                                left: { xs: -8, sm: 0 },
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                zIndex: 2
+                            }}
+                        >
+                            <KeyboardArrowLeftIcon />
+                        </IconButton>
+                    )}
 
                     <Box sx={{
                         display: 'flex',
                         transition: 'transform 0.3s ease-in-out',
                         mx: 'auto',
                         maxWidth: '1000px',
-                        gap: 2,
-                        px: 8
+                        gap: { xs: 1, sm: 2 },
+                        px: { xs: 0, sm: 8 }
                     }}>
                         {getVisibleCards().map((index) => (
                             <Box
                                 key={index}
                                 sx={{
-                                    flex: '0 0 33.333%',
+                                    flex: isMobile ? '0 0 100%' : '0 0 33.333%',
                                     transition: 'all 0.3s ease-in-out',
                                 }}
                             >
@@ -126,13 +155,31 @@ const ProblemStatement = () => {
                                     color={selectedIndex === index ? "primary" : undefined}
                                     className={selectedIndex === index ? 'active' : ''}
                                 >
-                                    <Typography level="h4" sx={{ mb: 1.5 }}>
+                                    <Typography
+                                        level="h4"
+                                        sx={{
+                                            mb: 1.5,
+                                            fontSize: { xs: 'lg', sm: 'xl' }
+                                        }}
+                                    >
                                         {benefits[index].title}
                                     </Typography>
-                                    <Typography level="body-md">
+                                    <Typography
+                                        level="body-md"
+                                        sx={{
+                                            fontSize: { xs: 'sm', sm: 'md' }
+                                        }}
+                                    >
                                         {benefits[index].description}
                                     </Typography>
-                                    <Typography level="body-sm" sx={{ mt: 2, opacity: 0.8 }}>
+                                    <Typography
+                                        level="body-sm"
+                                        sx={{
+                                            mt: 2,
+                                            opacity: 0.8,
+                                            fontSize: { xs: 'xs', sm: 'sm' }
+                                        }}
+                                    >
                                         Source: {benefits[index].source}
                                     </Typography>
                                 </StyledCard>
@@ -140,18 +187,20 @@ const ProblemStatement = () => {
                         ))}
                     </Box>
 
-                    <IconButton
-                        onClick={handleNext}
-                        sx={{
-                            position: 'absolute',
-                            right: 0,
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            zIndex: 2
-                        }}
-                    >
-                        <KeyboardArrowRightIcon />
-                    </IconButton>
+                    {!isMobile && (
+                        <IconButton
+                            onClick={handleNext}
+                            sx={{
+                                position: 'absolute',
+                                right: { xs: -8, sm: 0 },
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                zIndex: 2
+                            }}
+                        >
+                            <KeyboardArrowRightIcon />
+                        </IconButton>
+                    )}
                 </CarouselContainer>
 
                 {/* Dots indicator */}
@@ -159,15 +208,15 @@ const ProblemStatement = () => {
                     display: 'flex',
                     justifyContent: 'center',
                     gap: 1,
-                    mt: 3
+                    mt: { xs: 2, sm: 3 }
                 }}>
                     {benefits.map((_, index) => (
                         <Box
                             key={index}
                             onClick={() => setSelectedIndex(index)}
                             sx={{
-                                width: '8px',
-                                height: '8px',
+                                width: { xs: '6px', sm: '8px' },
+                                height: { xs: '6px', sm: '8px' },
                                 borderRadius: '50%',
                                 bgcolor: index === selectedIndex ? 'primary.500' : 'neutral.300',
                                 cursor: 'pointer',
@@ -179,7 +228,13 @@ const ProblemStatement = () => {
 
                 <Button
                     size="lg"
-                    sx={{ mt: 4, display: 'block', mx: 'auto', mb: 6 }}
+                    sx={{
+                        mt: { xs: 3, sm: 4 },
+                        display: 'block',
+                        mx: 'auto',
+                        mb: { xs: 4, sm: 6 },
+                        width: { xs: '100%', sm: 'auto' }
+                    }}
                     onClick={() => window.open(demoLink, '_blank')}
                 >
                     Schedule a demo

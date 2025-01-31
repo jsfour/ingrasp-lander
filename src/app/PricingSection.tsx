@@ -1,18 +1,18 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Box, Container, Typography, Card, Button } from '@mui/joy';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import InfiniteIcon from '@mui/icons-material/AllInclusive';
 import SavingsIcon from '@mui/icons-material/Savings';
 import { SectionContainer } from './components/SectionContainer';
-import { demoLink } from './components/link-urls';
+import { demoLink } from './constants/link-urls';
+import { CostComparisonChart } from './components/CostComparison';
 
 interface FeatureProps {
     icon: React.ReactNode;
     text: string;
 }
 
-const features: FeatureProps[] = [
+const features = [
     {
         icon: <AutorenewIcon />,
         text: "Unlimited use, infinite characters",
@@ -34,159 +34,37 @@ const Feature: React.FC<FeatureProps> = ({ icon, text }) => (
     </Box>
 );
 
-const PricingCard = () => {
-    const [isFlipped, setIsFlipped] = useState(false);
-
+const DemoCard = () => {
     return (
-        <Box sx={{ perspective: 1000, maxWidth: 400, width: '100%', height: 400 }}>
+        <Box sx={{ maxWidth: 400, width: '100%' }}>
             <Card
                 sx={{
-                    p: 0,
+                    p: 4,
                     height: '100%',
-                    position: 'relative',
                     '&:hover': {
                         boxShadow: 'lg',
                     },
                 }}
             >
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        backfaceVisibility: 'hidden',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        p: 4,
-                        textAlign: 'center',
+                <Typography level="h2" sx={{ mb: 4, textAlign: 'center' }}>
+                    Get Started
+                </Typography>
+                <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    {features.map((feature, index) => (
+                        <Feature key={index} {...feature} />
+                    ))}
+                </Box>
+                <Button
+                    size="lg"
+                    sx={{ mt: 4, width: '100%' }}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        window.location.href = demoLink;
                     }}
                 >
-                    <Typography level="h2" sx={{ mb: 2, textAlign: 'center' }}>
-                        $800
-                        <Typography level="body-sm" component="span">/year</Typography>
-                    </Typography>
-                    <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        {features.map((feature, index) => (
-                            <Feature key={index} {...feature} />
-                        ))}
-                    </Box>
-                    <Button
-                        size="lg"
-                        sx={{ mt: 4 }}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            window.location.href = demoLink;
-                        }}
-                    >
-                        Get Started Now
-                    </Button>
-                </Box>
+                    Schedule Demo
+                </Button>
             </Card>
-        </Box>
-    );
-};
-
-const CostComparisonChart = () => {
-    return (
-        <Box sx={{ mt: 6, width: '100%', maxWidth: 600 }}>
-            <Typography level="h3" sx={{ mb: 4, textAlign: 'center' }}>
-                Annual Cost Comparison
-            </Typography>
-
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 4,
-            }}>
-                {/* InGrasp Bar */}
-                <Box>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                        <Typography level="body-md">Ingrasp</Typography>
-                        <Typography level="body-md" fontWeight="bold">$600/year</Typography>
-                    </Box>
-                    <Box sx={{
-                        width: '100%',
-                        height: '40px',
-                        background: '#f0f0f0',
-                        borderRadius: '20px',
-                        overflow: 'hidden',
-                        position: 'relative',
-                    }}>
-                        <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: '6%' }} // 600/10000 = 6%
-                            transition={{ duration: 1, ease: "easeOut" }}
-                            viewport={{ once: true }}
-                            style={{
-                                position: 'absolute',
-                                height: '100%',
-                                background: 'linear-gradient(90deg, #2196f3 0%, #1976d2 100%)',
-                                borderRadius: '20px',
-                            }}
-                        />
-                    </Box>
-                </Box>
-
-                {/* Custom Photo Shoots Bar */}
-                <Box>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                        <Typography level="body-md">Custom Photo Shoots</Typography>
-                        <Typography level="body-md" fontWeight="bold">$10,000+/year</Typography>
-                    </Box>
-                    <Box sx={{
-                        width: '100%',
-                        height: '40px',
-                        background: '#f0f0f0',
-                        borderRadius: '20px',
-                        overflow: 'hidden',
-                        position: 'relative',
-                    }}>
-                        <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: '100%' }}
-                            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-                            viewport={{ once: true }}
-                            style={{
-                                position: 'absolute',
-                                height: '100%',
-                                background: 'linear-gradient(90deg, #e91e63 0%, #c2185b 100%)',
-                                borderRadius: '20px',
-                            }}
-                        />
-                    </Box>
-                </Box>
-
-                {/* Savings Callout */}
-                <Box sx={{
-                    mt: 2,
-                    p: 3,
-                    background: 'linear-gradient(145deg, rgba(33, 150, 243, 0.1) 0%, rgba(25, 118, 210, 0.1) 100%)',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(33, 150, 243, 0.2)',
-                }}>
-                    <Typography
-                        level="h4"
-                        sx={{
-                            textAlign: 'center',
-                            color: 'primary.main',
-                        }}
-                    >
-                        Save up to 94% annually
-                    </Typography>
-                    <Typography
-                        level="body-md"
-                        sx={{
-                            textAlign: 'center',
-                            mt: 1,
-                            color: 'text.secondary',
-                        }}
-                    >
-                        Compared to traditional photo shoots
-                    </Typography>
-                </Box>
-            </Box>
         </Box>
     );
 };
@@ -227,7 +105,7 @@ export default function PricingSection() {
                         gap: 6,
                     }}
                 >
-                    <PricingCard />
+                    <DemoCard />
                     <CostComparisonChart />
                 </Box>
             </Container>

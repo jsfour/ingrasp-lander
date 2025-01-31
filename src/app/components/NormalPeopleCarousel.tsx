@@ -7,12 +7,15 @@ export const NormalPeopleCarousel = ({ primary, secondary }: { primary?: string,
 
     return (
         <SectionContainer>
-            <SectionHeader primaryText={primary || "Finally normal people. In multiple situations."} />
+            <SectionHeader primaryText={primary || "State of the art character consistency across images."} />
 
             <Box
                 sx={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    gridTemplateColumns: {
+                        xs: 'repeat(2, 1fr)',
+                        md: 'repeat(4, 1fr)',
+                    },
                     gap: 2,
                     px: 2,
                     position: 'relative',
