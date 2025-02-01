@@ -18,13 +18,13 @@ export default function PageNotFound() {
                 }}
             >
                 <Typography level="h1" sx={{ fontSize: '4rem', mb: 2 }}>
-                    404
+                    {"404"}
                 </Typography>
                 <Typography level="h2" sx={{ mb: 2 }}>
-                    Page Not Found
+                    {"Page Not Found"}
                 </Typography>
                 <Typography sx={{ mb: 4, textAlign: 'center' }}>
-                    Oops! The page you're looking for doesn't exist. Let's get you back home.
+                    {"Oops! The page you're looking for doesn't exist. Let's get you back home."}
                 </Typography>
                 <Button
                     component={Link}
@@ -34,7 +34,7 @@ export default function PageNotFound() {
                         minWidth: 200,
                     }}
                 >
-                    Return Home
+                    {"Return Home"}
                 </Button>
             </Box>
         </MainLayout>
