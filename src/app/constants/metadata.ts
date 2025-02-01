@@ -8,7 +8,7 @@ export const baseMetadata: Metadata = {
         description: "Consistent Characters for Your Training Programs",
         images: [
             {
-                url: '/meta-images/facebook.png',
+                url: 'https://www.ingrasp.ai/meta-images/facebook.png',
                 width: 1200,
                 height: 630,
             },
