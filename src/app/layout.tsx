@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleTagManager } from '@next/third-parties/google'
+import { baseMetadata } from "./constants/metadata";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ingrasp",
-  description: "Dramatically reducing the cost of training the workforce.",
-};
+  ...baseMetadata,
+}
+
 
 export default function RootLayout({
   children,
@@ -17,8 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <GoogleTagManager gtmId="GTM-MSLLNR34" />
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <GoogleTagManager gtmId="GTM-MSLLNR34" />
+      </body>
     </html>
   );
 }
