@@ -9,6 +9,8 @@ import TestamonialSection from './components/TestamonialSection';
 import BookDemo from './components/BookDemo';
 import MainLayout from './components/MainLayout';
 import { demoLink } from './constants/link-urls';
+import Faq from "./components/Faq";
+import { faqs } from './constants/faqs';
 
 export default function Main() {
   return (
@@ -23,6 +25,7 @@ export default function Main() {
       />
       <ProductSection />
       <NormalPeopleCarousel />
+      <Faq primaryText="Frequently Asked Questions" secondaryText="Answers to common questions" faqs={faqs} />
       <BookDemo href={demoLink} />
     </MainLayout>
   );

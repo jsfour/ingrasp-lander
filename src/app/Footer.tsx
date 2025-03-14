@@ -152,8 +152,8 @@ export default function Footer() {
                             Quick Links
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            {/* <FooterLink href="/about">About</FooterLink> */}
-                            <FooterLink href="/faq">FAQ</FooterLink>
+                            <FooterLink href="https://app.getingrasp.com/login">Sign In</FooterLink>
+                            { /* <FooterLink href="/faq">FAQ</FooterLink> *}
                             {/* <FooterLink href="/privacy">Privacy Policy</FooterLink> */}
                             {/* <FooterLink href="/terms">Terms of Service</FooterLink> */}
                         </Box>

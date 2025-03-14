@@ -48,9 +48,15 @@ export default function FloatingNav({ visible }: FloatingNavProps) {
                 </Box>
                 <Box sx={{ display: 'flex', gap: 2 }}>
                     <Button
+                        variant="outlined"
+                        onClick={() => router.push("https://app.getingrasp.com/login")}
+                    >
+                        Sign In
+                    </Button>
+                    <Button
                         onClick={() => router.push(demoLink)}
                     >
-                        Book Demo
+                        Get Started
                     </Button>
                 </Box>
             </Box>
