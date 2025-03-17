@@ -50,6 +50,9 @@ export default function FloatingNav({ visible }: FloatingNavProps) {
                     <Button
                         variant="outlined"
                         onClick={() => router.push("https://app.getingrasp.com/login")}
+                        sx={{
+                            display: { xs: 'none', sm: 'inline-flex' }
+                        }}
                     >
                         Sign In
                     </Button>
