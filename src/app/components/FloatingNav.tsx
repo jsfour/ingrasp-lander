@@ -4,6 +4,7 @@ import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { sendGTMEvent } from '@next/third-parties/google'
 import { demoLink } from '../constants/link-urls';
 
 interface FloatingNavProps {
@@ -57,9 +58,12 @@ export default function FloatingNav({ visible }: FloatingNavProps) {
                         Sign In
                     </Button>
                     <Button
-                        onClick={() => router.push(demoLink)}
+                        onClick={() => {
+                            sendGTMEvent({ event: "BookDemoClick", value: "Nav" })
+                            router.push(demoLink)
+                        }}
                     >
-                        Get Started
+                        Book a Demo
                     </Button>
                 </Box>
             </Box>

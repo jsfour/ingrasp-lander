@@ -6,7 +6,7 @@ import SavingsIcon from '@mui/icons-material/Savings';
 import { SectionContainer } from './components/SectionContainer';
 import { demoLink } from './constants/link-urls';
 import { CostComparisonChart } from './components/CostComparison';
-
+import { sendGTMEvent } from '@next/third-parties/google'
 interface FeatureProps {
     icon: React.ReactNode;
     text: string;
@@ -59,10 +59,11 @@ const DemoCard = () => {
                     sx={{ mt: 4, width: '100%' }}
                     onClick={(e) => {
                         e.stopPropagation();
+                        sendGTMEvent({ event: "BookDemoClick", value: "Pricing" })
                         window.location.href = demoLink;
                     }}
                 >
-                    Schedule Demo
+                    Book a Demo
                 </Button>
             </Card>
         </Box>

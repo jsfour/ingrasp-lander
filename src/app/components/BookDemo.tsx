@@ -4,8 +4,9 @@ import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import Typography from '@mui/joy/Typography';
 import SectionHeader from './Header';
+import { sendGTMEvent } from '@next/third-parties/google'
 
-export default function BookDemo({ href = "/demo" }: { href?: string }) {
+export default function BookDemo({ href = "/demo", loc = "BookDemo" }: { href?: string, loc?: string }) {
     const router = useRouter();
 
     return (
@@ -21,7 +22,10 @@ export default function BookDemo({ href = "/demo" }: { href?: string }) {
             <SectionHeader primaryText="Ready to accelerate your training development?" secondaryText="Book a demo to see how Ingrasp can help you create realistic characters for your training scenarios." />
             <Button
                 size="lg"
-                onClick={() => router.push(href)}
+                onClick={() => {
+                    sendGTMEvent({ event: "BookDemoClick", value: loc })
+                    router.push(href)
+                }}
                 sx={{
                     minWidth: 200,
                 }}

@@ -5,6 +5,7 @@ import ScrollingImageGrid from './components/ScrollingImageGrid';
 import StarfieldEffect from './components/StarfieldEffect';
 import { useState } from 'react';
 import { demoLink } from './constants/link-urls';
+import { sendGTMEvent } from '@next/third-parties/google'
 
 export default function HeroSection() {
     const [isHovering, setIsHovering] = useState(false);
@@ -124,7 +125,10 @@ export default function HeroSection() {
                                 color="primary"
                                 onMouseEnter={() => setIsHovering(true)}
                                 onMouseLeave={() => setIsHovering(false)}
-                                onClick={() => window.location.href = demoLink}
+                                onClick={() => {
+                                    sendGTMEvent({ event: "BookDemoClick", value: "Hero" })
+                                    window.location.href = demoLink
+                                }}
                                 sx={{
                                     background: (theme) =>
                                         `linear-gradient(45deg, ${theme.vars.palette.primary[600]}, ${theme.vars.palette.primary[500]})`,
@@ -136,7 +140,7 @@ export default function HeroSection() {
                                     },
                                 }}
                             >
-                                Get Started
+                                Book a Demo
                             </Button>
                         </Stack>
                     </motion.div>

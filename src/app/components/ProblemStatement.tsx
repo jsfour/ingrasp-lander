@@ -7,6 +7,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import SectionHeader from './Header';
 import { demoLink } from '../constants/link-urls';
 import { SectionContainer } from './SectionContainer';
+import { sendGTMEvent } from '@next/third-parties/google'
 
 const benefits = [
     {
@@ -235,9 +236,12 @@ const ProblemStatement = () => {
                         mb: { xs: 4, sm: 6 },
                         width: { xs: '100%', sm: 'auto' }
                     }}
-                    onClick={() => window.open(demoLink, '_blank')}
+                    onClick={() => {
+                        sendGTMEvent({ event: "BookDemoClick", value: "Problem Statement" })
+                        window.open(demoLink, '_blank')
+                    }}
                 >
-                    Schedule a demo
+                    Book a Demo
                 </Button>
             </Box>
         </SectionContainer>

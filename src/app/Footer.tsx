@@ -1,19 +1,18 @@
 import { motion } from 'framer-motion';
 import { Box, Container, Typography, Link, IconButton, Divider } from '@mui/joy';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
 import { loginLink, demoLink } from './constants/link-urls';
-
+import { sendGTMEvent } from '@next/third-parties/google'
 interface FooterLinkProps {
     href: string;
     children: React.ReactNode;
+    onClick?: () => void;
 }
 
-const FooterLink = ({ href, children }: FooterLinkProps) => (
+const FooterLink = ({ href, onClick, children }: FooterLinkProps) => (
     <Link
         href={href}
+        onClick={onClick}
         sx={{
             color: 'text.secondary',
             textDecoration: 'none',
@@ -152,7 +151,7 @@ export default function Footer() {
                             Quick Links
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            <FooterLink href="https://app.getingrasp.com/login">Sign In</FooterLink>
+                            <FooterLink href="https://app.getingrasp.com/login" onClick={() => sendGTMEvent({ event: "ButtonClick", value: "Sign In Footer" })}>Sign In</FooterLink>
                             { /* <FooterLink href="/faq">FAQ</FooterLink> *}
                             {/* <FooterLink href="/privacy">Privacy Policy</FooterLink> */}
                             {/* <FooterLink href="/terms">Terms of Service</FooterLink> */}
@@ -213,11 +212,11 @@ export default function Footer() {
                     }}
                 >
                     <Typography level="body-sm" sx={{ color: 'text.secondary' }}>
-                        © 2024 Ingrasp. All rights reserved.
+                        © {new Date().getFullYear()} Ingrasp. All rights reserved.
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 3 }}>
-                        <FooterLink href={loginLink}>Sign In</FooterLink>
-                        <FooterLink href={demoLink}>Book Demo</FooterLink>
+                        <FooterLink href={loginLink} onClick={() => sendGTMEvent({ event: "ButtonClick", value: "Sign In Footer" })}>Sign In</FooterLink>
+                        <FooterLink href={demoLink} onClick={() => sendGTMEvent({ event: "BookDemoClick", value: "Footer" })}>Book Demo</FooterLink>
                     </Box>
                 </Box>
             </Container>

@@ -26,7 +26,7 @@ export default function Main() {
       <ProductSection />
       <NormalPeopleCarousel />
       <Faq primaryText="Frequently Asked Questions" secondaryText="Answers to common questions" faqs={faqs} />
-      <BookDemo href={demoLink} />
+      <BookDemo href={demoLink} loc="Book Demo Section" />
     </MainLayout>
   );
 }
